@@ -1,6 +1,6 @@
 {
   "name": "inventory-system",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "public/main.js",
   "description": "DuoSimple Controla tu Inventario",
   "author": "Duoloon",
