@@ -1,9 +1,9 @@
 {
-  "name": "inventory-system2",
-  "version": "0.0.8",
+  "name": "inventory-system",
+  "version": "0.0.1",
   "main": "public/main.js",
-  "description": "inventory-system: sistema de inventario básico",
-  "author": "Cesar Casadiego",
+  "description": "DuoSimple Controla tu Inventario",
+  "author": "Duoloon",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -67,19 +67,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CC25MC/inventory-system"
+    "url": "git+https://github.com/Duoloon/inventory-system"
   },
   "bugs": {
-    "url": "https://github.com/CC25MC/inventory-system/issues"
+    "url": "https://github.com/Duoloon/inventory-system/issues"
   },
   "homepage": "./",
   "build": {
-    "appId": "com.github.CC25MC.inventory-system",
+    "appId": "com.github.Duoloon.inventory-system",
+    "productName": "DuoSimple",
     "mac": {
       "category": "your.app.category.type"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "public/images/android-chrome-512x512.png"
     },
     "nsis": {
       "oneClick": false
@@ -87,7 +89,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "CC25MC",
+        "owner": "Duoloon",
         "repo": "inventory-system"
       }
     ],
