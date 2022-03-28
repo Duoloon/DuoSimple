@@ -1,6 +1,6 @@
 {
-  "name": "inventory-system",
-  "version": "0.0.3",
+  "name": "duosimple",
+  "version": "0.0.2",
   "main": "public/main.js",
   "description": "DuoSimple Controla tu Inventario",
   "author": "Duoloon",
@@ -67,14 +67,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Duoloon/inventory-system"
+    "url": "git+https://github.com/Duoloon/DuoSimple"
   },
   "bugs": {
-    "url": "https://github.com/Duoloon/inventory-system/issues"
+    "url": "https://github.com/Duoloon/DuoSimple/issues"
   },
   "homepage": "./",
   "build": {
-    "appId": "com.github.Duoloon.inventory-system",
+    "appId": "com.github.Duoloon.DuoSimple",
     "productName": "DuoSimple",
     "mac": {
       "category": "your.app.category.type"
@@ -90,7 +90,7 @@
       {
         "provider": "github",
         "owner": "Duoloon",
-        "repo": "inventory-system"
+        "repo": "DuoSimple"
       }
     ],
     "linux": {
