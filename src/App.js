@@ -38,7 +38,7 @@ const Watermark = () => {
     >
       <Typography
         sx={{
-          color: '#EDEFF3',
+          color: '#EDEFF3'
         }}
       >
         DUOLOON
@@ -81,7 +81,7 @@ const App = () => {
             <Sidebar>
               <AppRouter />
               <Notify />
-              <Watermark />
+              {/* <Watermark /> */}
             </Sidebar>
           </SnackbarProvider>
         </Suspense>

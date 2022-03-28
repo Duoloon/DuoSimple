@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { format } from 'rut.js'
-import { getLicense, mutateLicense } from '../../Hooks'
+import { getLicense, mutateLicense, useLicense } from '../../Hooks'
 import { useSnackbar } from 'notistack'
 
 const data = {
@@ -9,15 +8,16 @@ const data = {
 export const Actions = () => {
   const { enqueueSnackbar } = useSnackbar()
   const [values, setValues] = useState(data)
-  const { data: allLicencia, isLoading: getLoading } = getLicense()
+  const { data: allLicencia, isLoading: getLoading, message } = getLicense()
+  const { license, setLicense } = useLicense()
   const { mutate, isLoading: Loading, error } = mutateLicense()
 
   useEffect(() => {
-    if (allLicencia) {
+    if (allLicencia[0]) {
       setValues(allLicencia[0])
+      setLicense(message)
     }
   }, [allLicencia])
-
   useEffect(() => {
     if (error) {
       enqueueSnackbar('Error creando o editando la licencia', {
@@ -25,7 +25,6 @@ export const Actions = () => {
       })
     }
   }, [error])
-
   const { licenseKey } = values || {}
 
   const handleChange = prop => event => {
@@ -35,11 +34,11 @@ export const Actions = () => {
     })
   }
   const saveData = () => {
-    mutate(values)
+    mutate({ id: values?.id, licenseKey: licenseKey })
   }
-  console.log(allLicencia)
+  // console.log(allLicencia)
   return {
-    isLicense: allLicencia[0]?.id ? true : false,
+    isLicense: license?.data?.id ? true : false,
     licenseKey,
     isLoading: getLoading || Loading,
     // error,

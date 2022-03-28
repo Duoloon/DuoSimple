@@ -24,3 +24,8 @@ export const get = async () => {
     const res = await request.get(endpoints.get);
     return res.data;
 };
+
+export const getStatus = async (license) => {
+    const res = await request.get(`https://duoloon.com/wp-json/lmfwc/v2/licenses/${license}`);
+    return res.data;
+};

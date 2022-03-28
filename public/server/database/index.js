@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize')
-//const isDev = require('electron-is-dev')
+const isDev = require('electron-is-dev')
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',

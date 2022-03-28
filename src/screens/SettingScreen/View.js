@@ -1,33 +1,19 @@
-import React, { useState, forwardRef } from 'react'
+import React from 'react'
 import {
   Box,
-  Divider,
   Button,
-  Dialog,
   Typography,
-  AppBar as MuiAppBar,
-  Toolbar,
-  IconButton,
   TextField,
-  Switch,
-  FormControlLabel,
   AccordionSummary,
   AccordionDetails,
   Accordion,
   Chip,
   Link
 } from '@mui/material'
-import { AppBar, Search } from '../../components'
-import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid'
-import { useLocation } from '../../Hooks'
-import CloseIcon from '@mui/icons-material/Close'
-import { Delete, Edit, ExpandMore } from '@mui/icons-material'
-import Slide from '@mui/material/Slide'
-import { titles } from '../../variables'
+import { AppBar } from '../../components'
+import { ExpandMore } from '@mui/icons-material'
+
 const { shell } = window.require('electron')
-const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />
-})
 
 const SettingView = ({
   licenseKey,
@@ -36,14 +22,6 @@ const SettingView = ({
   handleChange,
   saveData
 }) => {
-  const { path, setPath } = useLocation()
-
-  const save = () => {
-    saveData()
-    setOpen(false)
-    setIds([])
-  }
-
   return (
     <Box
       sx={{

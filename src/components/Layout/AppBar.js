@@ -1,7 +1,7 @@
 import { Add } from '@mui/icons-material'
 import { useState, useEffect } from 'react'
-import { Box, Typography, Button, Divider, styled } from '@mui/material'
-import { useLocation } from '../../Hooks'
+import { Box, Typography, Button, Divider, styled, Modal } from '@mui/material'
+import { useLocation, useLicense } from '../../Hooks'
 import { titles } from '../../variables'
 import { read, utils } from 'xlsx'
 import { useSnackbar } from 'notistack'
@@ -9,10 +9,24 @@ import { useSnackbar } from 'notistack'
 const Input = styled('input')({
   display: 'none'
 })
-export const AppBar = ({ action, saveData }) => {
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4
+}
+export const AppBar = ({ action, saveData, allProduct }) => {
   const { enqueueSnackbar } = useSnackbar()
   const { path, setPath } = useLocation()
   const [excel, setExcel] = useState(null)
+  const [open, setOpen] = useState(false)
+  const { status } = useLicense()
+  const handleClose = () => setOpen(false)
   const handleChange = async e => {
     const file = e.target.files[0]
     const data = await file.arrayBuffer()
@@ -110,17 +124,39 @@ export const AppBar = ({ action, saveData }) => {
                 id="contained-button-file"
                 multiple
                 type="file"
+                disabled={
+                  (status() && path === '/product') ||
+                  (path === '/product' && allProduct.length === 50)
+                    ? true
+                    : false
+                }
                 onChange={handleChange}
               />
-              <Button variant="outlined" component="span">
+              <Button
+                variant="outlined"
+                disabled={
+                  (status() && path === '/product') ||
+                  (path === '/product' && allProduct.length === 50)
+                    ? true
+                    : false
+                }
+                component="span"
+              >
                 Importar Excel
               </Button>
             </label>
             <Button
               sx={{ marginLeft: 3 }}
               onClick={() => {
-                setPath(path + '/create')
-                action(true)
+                if (
+                  (status() && path === '/product') ||
+                  (path === '/product' && allProduct.length === 50)
+                ) {
+                  setOpen(true)
+                } else {
+                  setPath(path + '/create')
+                  action(true)
+                }
               }}
               variant="contained"
             >
@@ -131,6 +167,21 @@ export const AppBar = ({ action, saveData }) => {
         )}
       </Box>
       <Divider />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </>
   )
 }

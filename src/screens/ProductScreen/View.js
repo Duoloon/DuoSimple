@@ -56,7 +56,7 @@ const ProductView = ({
   const [open, setOpen] = useState(true)
   const [update, setUpdate] = useState(false)
   const [ids, setIds] = useState([])
-
+  console.log(allProduct)
   const handleClick = () => {
     setOpen(false)
     setPath('/product')
@@ -139,7 +139,11 @@ const ProductView = ({
     >
       {path === '/product' ? (
         <>
-          <AppBar action={setOpen} saveData={importExcel} />
+          <AppBar
+            action={setOpen}
+            saveData={importExcel}
+            allProduct={allProduct}
+          />
           {/* <Box sx={{ paddingLeft: 3, paddingRight: 3, paddingTop: 3 }}>
             <ButtonGroup
               fullWidth
