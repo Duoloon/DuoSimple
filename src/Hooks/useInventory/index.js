@@ -6,7 +6,10 @@ import { useLocation } from '../useLocation'
 
 export const getInventory = () => {
   const { isLoading, data, error } = useQuery('/api/inventario', () =>
-    request.inventory.get()
+    request.inventory.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,
@@ -16,7 +19,10 @@ export const getInventory = () => {
 }
 export const getEntry = () => {
   const { isLoading, data, error } = useQuery('/api/entrada', () =>
-    request.entry.get()
+    request.entry.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,
@@ -26,7 +32,10 @@ export const getEntry = () => {
 }
 export const getExit = () => {
   const { isLoading, data, error } = useQuery('/api/salida', () =>
-    request.exit.get()
+    request.exit.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,

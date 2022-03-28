@@ -5,7 +5,10 @@ import { useLocation } from '../useLocation'
 
 export const getSupplier = () => {
   const { isLoading, data, error } = useQuery('/api/proveedor', () =>
-    request.supplier.get()
+    request.supplier.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,
@@ -44,8 +47,8 @@ export const importSupplier = () => {
     payload => request.supplier.excel(payload),
     {
       onSuccess: data => {
-        if (data?.data) {
-          enqueueSnackbar(`Proveedor ${data?.message}`, {
+        if (data?.message) {
+          enqueueSnackbar(`Datos ${data?.message}`, {
             variant: 'success'
           })
           // setPath('/client')

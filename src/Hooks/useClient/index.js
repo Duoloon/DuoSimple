@@ -4,8 +4,12 @@ import { useSnackbar } from 'notistack'
 import { useLocation } from '../useLocation'
 
 export const getClients = () => {
-  const { isLoading, data, error } = useQuery('/api/cliente', () =>
-    request.client.get()
+  const { isLoading, data, error } = useQuery(
+    '/api/cliente',
+    () => request.client.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,
@@ -44,8 +48,8 @@ export const importClients = () => {
     payload => request.client.excel(payload),
     {
       onSuccess: data => {
-        if (data?.data) {
-          enqueueSnackbar(`Clientes ${data?.message}`, {
+        if (data?.message) {
+          enqueueSnackbar(`Datos ${data?.message}`, {
             variant: 'success'
           })
           // setPath('/client')

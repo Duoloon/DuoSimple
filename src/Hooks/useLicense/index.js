@@ -33,7 +33,10 @@ export const useLicense = () => {
 
 export const getLicense = () => {
   const { isLoading, data, error } = useQuery('/api/License', () =>
-    request.license.get()
+    request.license.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,

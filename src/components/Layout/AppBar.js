@@ -175,11 +175,22 @@ export const AppBar = ({ action, saveData, allProduct }) => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Uppss Alcanzaste el Limite Máximo
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Recuerda que para nuestra version gratuita tienes un limite de 50
+            Skus, posteriormente para seguir usando nuestra app debes adquirir
+            una licencia.
           </Typography>
+          <Button
+            sx={{ marginTop: 3, width: '100%' }}
+            onClick={() => {
+              setPath('/setting')
+            }}
+            variant="contained"
+          >
+            Ir a configuración
+          </Button>
         </Box>
       </Modal>
     </>

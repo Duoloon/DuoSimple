@@ -84,14 +84,9 @@ const create = async (req, res) => {
 }
 
 const insertData = async (req, res) => {
-  try {
-    const response = await Proveedor.bulkCreate(req.body.data)
-    const ress = { success: true, data: data, message: 'creado exitosamente' }
-    return res.json(ress)
-  } catch (e) {
-    const ress = { success: false, error: "ocurrio un error" }
-    res.json(ress)
-  }
+  const response = await Proveedor.bulkCreate(req.body.data)
+  const ress = { success: true, data: data, message: 'creado exitosamente' }
+  return res.json(ress)
 }
 
 const update = async (req, res) => {

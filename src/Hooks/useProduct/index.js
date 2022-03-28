@@ -5,7 +5,10 @@ import { useLocation } from '../useLocation'
 
 export const getProducts = () => {
   const { isLoading, data, error } = useQuery('/api/producto', () =>
-    request.product.get()
+    request.product.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,
@@ -45,8 +48,8 @@ export const importProduct = () => {
     payload => request.product.excel(payload),
     {
       onSuccess: data => {
-        if (data?.data) {
-          enqueueSnackbar(`Productos ${data?.message}`, {
+        if (data?.message) {
+          enqueueSnackbar(`Datos ${data?.message}`, {
             variant: 'success'
           })
           // setPath('/client')

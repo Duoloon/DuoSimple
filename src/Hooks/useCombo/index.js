@@ -5,7 +5,10 @@ import { useLocation } from '../useLocation'
 
 export const getCombo = () => {
   const { isLoading, data, error } = useQuery('/api/combo', () =>
-    request.combo.get()
+    request.combo.get(),
+    {
+      refetchInterval: 5000
+    }
   )
   return {
     isLoading,
