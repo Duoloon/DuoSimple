@@ -5,10 +5,7 @@ import { useLocation } from '../useLocation'
 
 export const getCombo = () => {
   const { isLoading, data, error } = useQuery('/api/combo', () =>
-    request.combo.get(),
-    {
-      refetchInterval: 5000
-    }
+    request.combo.get()
   )
   return {
     isLoading,
@@ -30,6 +27,7 @@ export const mutateCombo = () => {
             variant: 'success'
           })
           setPath('/product')
+          window.location.reload(true)
         }
       }
     }
@@ -53,6 +51,7 @@ export const destroyCombo = () => {
         enqueueSnackbar(`Combo ${data?.message}`, {
           variant: 'success'
         })
+        window.location.reload(true)
       }
     }
   })

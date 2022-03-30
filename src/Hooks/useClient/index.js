@@ -4,12 +4,8 @@ import { useSnackbar } from 'notistack'
 import { useLocation } from '../useLocation'
 
 export const getClients = () => {
-  const { isLoading, data, error } = useQuery(
-    '/api/cliente',
-    () => request.client.get(),
-    {
-      refetchInterval: 5000
-    }
+  const { isLoading, data, error } = useQuery('/api/cliente', () =>
+    request.client.get()
   )
   return {
     isLoading,
@@ -31,6 +27,9 @@ export const mutateClients = () => {
             variant: 'success'
           })
           setPath('/client')
+          setTimeout(() => {
+            window.location.reload(true)
+          }, 5000)
         }
       }
     }
@@ -54,6 +53,7 @@ export const importClients = () => {
           })
           // setPath('/client')
         }
+        window.location.reload(true)
       }
     }
   )
@@ -75,6 +75,9 @@ export const destroyClients = () => {
         enqueueSnackbar(`Cliente ${data?.message}`, {
           variant: 'success'
         })
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 5000)
       }
     }
   })

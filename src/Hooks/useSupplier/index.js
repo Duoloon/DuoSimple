@@ -5,10 +5,7 @@ import { useLocation } from '../useLocation'
 
 export const getSupplier = () => {
   const { isLoading, data, error } = useQuery('/api/proveedor', () =>
-    request.supplier.get(),
-    {
-      refetchInterval: 5000
-    }
+    request.supplier.get()
   )
   return {
     isLoading,
@@ -30,6 +27,7 @@ export const mutateSupplier = () => {
             variant: 'success'
           })
           setPath('/supplier')
+          window.location.reload(true)
         }
       }
     }
@@ -52,6 +50,7 @@ export const importSupplier = () => {
             variant: 'success'
           })
           // setPath('/client')
+          window.location.reload(true)
         }
       }
     }
@@ -75,6 +74,7 @@ export const destroySupplier = () => {
         enqueueSnackbar(`Proveedor ${data?.message}`, {
           variant: 'success'
         })
+        window.location.reload(true)
       }
     }
   })

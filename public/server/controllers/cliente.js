@@ -83,9 +83,25 @@ const create = async (req, res) => {
 }
 
 const insertData = async (req, res) => {
-  const response = await Clientes.bulkCreate(req.body.data)
-  const ress = { success: true, data: data, message: 'creado exitosamente' }
-  return res.json(ress)
+  try {
+    if(req.body.data){
+      const response = await Clientes.bulkCreate(req.body.data)
+      .then(function (data) {
+        const res = { success: true, data: data }
+        return res
+      })
+      .catch(error => {
+        const res = { success: false, error: error }
+        return res
+      })
+    const ress = { success: true, data: data, message: 'creado exitosamente' }
+    return res.json(ress)
+    }
+    const ress = { success: false, message: 'No se envió la data' }
+    return res.json(ress)
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 const update = async (req, res) => {

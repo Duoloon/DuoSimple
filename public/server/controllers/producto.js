@@ -136,9 +136,34 @@ const create = async (req, res) => {
 }
 
 const insertData = async (req, res) => {
-  const response = await Producto.bulkCreate(req.body.data)
-  const ress = { success: true, data: data, message: 'creado exitosamente' }
-  return res.json(ress)
+  try {
+    const response = await Producto.bulkCreate(req.body.data)
+      .then(async function (data) {
+        console.log(data)
+        await Inventario.create({
+          ProductoId: data.id,
+          stock: 0,
+          entradasStock: '',
+          entradasValor: '',
+          salidasStock: '',
+          salidasValor: ''
+        })
+
+        const res = {
+          success: true,
+          data: data,
+          message: 'creado exitosamente'
+        }
+        return res
+      })
+      .catch(error => {
+        const res = { success: false, error: error }
+        return res
+      })
+    res.json(response)
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 const update = async (req, res) => {

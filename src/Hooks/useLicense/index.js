@@ -33,10 +33,7 @@ export const useLicense = () => {
 
 export const getLicense = () => {
   const { isLoading, data, error } = useQuery('/api/License', () =>
-    request.license.get(),
-    {
-      refetchInterval: 5000
-    }
+    request.license.get()
   )
   return {
     isLoading,
@@ -57,6 +54,7 @@ export const mutateLicense = () => {
             variant: 'success'
           })
           //   setPath('/history')
+          window.location.reload(true)
         }
       }
     }
@@ -80,6 +78,7 @@ export const destroyLicense = () => {
         enqueueSnackbar(`Licencia ${data?.message}`, {
           variant: 'success'
         })
+        window.location.reload(true)
       }
     }
   })

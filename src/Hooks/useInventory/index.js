@@ -6,10 +6,7 @@ import { useLocation } from '../useLocation'
 
 export const getInventory = () => {
   const { isLoading, data, error } = useQuery('/api/inventario', () =>
-    request.inventory.get(),
-    {
-      refetchInterval: 5000
-    }
+    request.inventory.get()
   )
   return {
     isLoading,
@@ -19,10 +16,7 @@ export const getInventory = () => {
 }
 export const getEntry = () => {
   const { isLoading, data, error } = useQuery('/api/entrada', () =>
-    request.entry.get(),
-    {
-      refetchInterval: 5000
-    }
+    request.entry.get()
   )
   return {
     isLoading,
@@ -32,10 +26,7 @@ export const getEntry = () => {
 }
 export const getExit = () => {
   const { isLoading, data, error } = useQuery('/api/salida', () =>
-    request.exit.get(),
-    {
-      refetchInterval: 5000
-    }
+    request.exit.get()
   )
   return {
     isLoading,
@@ -56,6 +47,7 @@ export const mutateEntry = () => {
             variant: 'success'
           })
           setPath('/')
+          window.location.reload(true)
         }
       }
     }
@@ -80,6 +72,7 @@ export const mutateExit = () => {
               variant: 'success'
             })
             setPath('/')
+            window.location.reload(true)
           }
         }
       }

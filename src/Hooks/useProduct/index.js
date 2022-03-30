@@ -5,10 +5,7 @@ import { useLocation } from '../useLocation'
 
 export const getProducts = () => {
   const { isLoading, data, error } = useQuery('/api/producto', () =>
-    request.product.get(),
-    {
-      refetchInterval: 5000
-    }
+    request.product.get()
   )
   return {
     isLoading,
@@ -30,6 +27,7 @@ export const mutateProduct = () => {
             variant: 'success'
           })
           setPath('/product')
+          window.location.reload(true)
         }
       }
     }
@@ -53,6 +51,7 @@ export const importProduct = () => {
             variant: 'success'
           })
           // setPath('/client')
+          window.location.reload(true)
         }
       }
     }
@@ -76,6 +75,7 @@ export const destroyProduct = () => {
         enqueueSnackbar(`Producto ${data?.message}`, {
           variant: 'success'
         })
+        window.location.reload(true)
       }
     }
   })
