@@ -29,7 +29,7 @@ export const mutateClients = () => {
           setPath('/client')
           setTimeout(() => {
             window.location.reload(true)
-          }, 5000)
+          }, 3000)
         }
       }
     }
@@ -53,7 +53,9 @@ export const importClients = () => {
           })
           // setPath('/client')
         }
-        window.location.reload(true)
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 3000)
       }
     }
   )
@@ -77,7 +79,7 @@ export const destroyClients = () => {
         })
         setTimeout(() => {
           window.location.reload(true)
-        }, 5000)
+        }, 3000)
       }
     }
   })

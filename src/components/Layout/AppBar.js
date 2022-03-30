@@ -1,9 +1,18 @@
 import { Add } from '@mui/icons-material'
 import { useState, useEffect } from 'react'
-import { Box, Typography, Button, Divider, styled, Modal } from '@mui/material'
+import {
+  Box,
+  Typography,
+  Button,
+  Divider,
+  styled,
+  Modal,
+  Stack,
+  Link
+} from '@mui/material'
 import { useLocation, useLicense } from '../../Hooks'
-import { titles } from '../../variables'
-import { read, utils } from 'xlsx'
+import { titles, download, filedownload } from '../../variables'
+import { read, utils, writeFile } from 'xlsx'
 import { useSnackbar } from 'notistack'
 
 const Input = styled('input')({
@@ -25,15 +34,26 @@ export const AppBar = ({ action, saveData, allProduct }) => {
   const { path, setPath } = useLocation()
   const [excel, setExcel] = useState(null)
   const [open, setOpen] = useState(false)
+  const [openExcel, setOpenExcel] = useState(false)
   const { status } = useLicense()
   const handleClose = () => setOpen(false)
+
+  const handleCloseExcel = () => setOpenExcel(false)
+
   const handleChange = async e => {
     const file = e.target.files[0]
     const data = await file.arrayBuffer()
     /* data is an ArrayBuffer */
     setExcel(data)
+    setOpenExcel(false)
   }
-
+  const exportar = () => {
+    let data = utils.json_to_sheet(filedownload[path])
+    const workbook = utils.book_new()
+    const filename = download[path]
+    utils.book_append_sheet(workbook, data, filename)
+    writeFile(workbook, filename)
+  }
   useEffect(() => {
     if (excel) {
       try {
@@ -115,36 +135,21 @@ export const AppBar = ({ action, saveData, allProduct }) => {
           path === '/inventory/history/exit' ||
           path === '/setting' ? null : (
           <>
-            <label
-              htmlFor="contained-button-file"
-              style={{ marginLeft: 'auto' }}
+            <Button
+              sx={{ marginLeft: 'auto' }}
+              disabled={
+                (status() && path === '/product') ||
+                (path === '/product' && allProduct.length === 50)
+                  ? true
+                  : false
+              }
+              onClick={() => {
+                setOpenExcel(true)
+              }}
+              variant="outlined"
             >
-              <Input
-                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                id="contained-button-file"
-                multiple
-                type="file"
-                disabled={
-                  (status() && path === '/product') ||
-                  (path === '/product' && allProduct.length === 50)
-                    ? true
-                    : false
-                }
-                onChange={handleChange}
-              />
-              <Button
-                variant="outlined"
-                disabled={
-                  (status() && path === '/product') ||
-                  (path === '/product' && allProduct.length === 50)
-                    ? true
-                    : false
-                }
-                component="span"
-              >
-                Importar Excel
-              </Button>
-            </label>
+              Importar Excel
+            </Button>
             <Button
               sx={{ marginLeft: 3 }}
               onClick={() => {
@@ -191,6 +196,44 @@ export const AppBar = ({ action, saveData, allProduct }) => {
           >
             Ir a configuración
           </Button>
+        </Box>
+      </Modal>
+      <Modal
+        open={openExcel}
+        onClose={handleCloseExcel}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Recordatorio
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Antes de importar los datos te dejamos esta plantilla para
+            descargar, donde tendras el formato correcto que debe cumplir el
+            excel
+          </Typography>
+          <Box sx={{ marginTop: 2 }} />
+
+          <Stack direction="row" spacing={2}>
+            <label htmlFor="contained-button-file">
+              <Input
+                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                id="contained-button-file"
+                multiple
+                type="file"
+                onChange={handleChange}
+              />
+              <Button variant="outlined" component="span">
+                Importar
+              </Button>
+            </label>
+            {download[path] && (
+              <Button variant="contained" onClick={exportar}>
+                Descargar Plantilla
+              </Button>
+            )}
+          </Stack>
         </Box>
       </Modal>
     </>

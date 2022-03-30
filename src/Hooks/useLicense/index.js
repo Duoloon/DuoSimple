@@ -54,7 +54,9 @@ export const mutateLicense = () => {
             variant: 'success'
           })
           //   setPath('/history')
-          window.location.reload(true)
+          setTimeout(() => {
+            window.location.reload(true)
+          }, 3000)
         }
       }
     }
@@ -78,7 +80,9 @@ export const destroyLicense = () => {
         enqueueSnackbar(`Licencia ${data?.message}`, {
           variant: 'success'
         })
-        window.location.reload(true)
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 3000)
       }
     }
   })

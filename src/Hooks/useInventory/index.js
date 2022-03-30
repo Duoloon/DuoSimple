@@ -47,7 +47,9 @@ export const mutateEntry = () => {
             variant: 'success'
           })
           setPath('/')
-          window.location.reload(true)
+          setTimeout(() => {
+            window.location.reload(true)
+          }, 3000)
         }
       }
     }
@@ -72,7 +74,9 @@ export const mutateExit = () => {
               variant: 'success'
             })
             setPath('/')
-            window.location.reload(true)
+            setTimeout(() => {
+              window.location.reload(true)
+            }, 3000)
           }
         }
       }

@@ -27,7 +27,9 @@ export const mutateSupplier = () => {
             variant: 'success'
           })
           setPath('/supplier')
-          window.location.reload(true)
+          setTimeout(() => {
+            window.location.reload(true)
+          }, 3000)
         }
       }
     }
@@ -50,7 +52,9 @@ export const importSupplier = () => {
             variant: 'success'
           })
           // setPath('/client')
-          window.location.reload(true)
+          setTimeout(() => {
+            window.location.reload(true)
+          }, 3000)
         }
       }
     }
@@ -74,7 +78,9 @@ export const destroySupplier = () => {
         enqueueSnackbar(`Proveedor ${data?.message}`, {
           variant: 'success'
         })
-        window.location.reload(true)
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 5000)
       }
     }
   })

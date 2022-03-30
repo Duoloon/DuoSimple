@@ -150,7 +150,6 @@ const insertData = async (req, res) => {
             salidasValor: ''
           })
         })
-        
 
         const res = {
           success: true,
@@ -228,11 +227,13 @@ const getOne = async (req, res) => {
 const deleteOne = async (req, res) => {
   try {
     const { id } = req.params
-
+    await Inventario.destroy({
+      where: { ProductoId: id }
+    })
     const response = await Producto.destroy({
       where: { id: id }
     })
-      .then(function (data) {
+      .then(async function (data) {
         const res = {
           success: true,
           data: data,

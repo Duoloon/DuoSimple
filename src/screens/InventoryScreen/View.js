@@ -89,7 +89,7 @@ const InventoryView = ({
       field: 'nombre',
       headerName: 'Producto',
       width: 150,
-      valueGetter: ({ row }) => row.Producto.nombre
+      valueGetter: ({ row }) => row?.Producto?.nombre
     },
     {
       field: 'stock',
