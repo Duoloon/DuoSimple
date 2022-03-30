@@ -140,14 +140,17 @@ const insertData = async (req, res) => {
     const response = await Producto.bulkCreate(req.body.data)
       .then(async function (data) {
         console.log(data)
-        await Inventario.create({
-          ProductoId: data.id,
-          stock: 0,
-          entradasStock: '',
-          entradasValor: '',
-          salidasStock: '',
-          salidasValor: ''
+        data.forEach(async dato => {
+          await Inventario.create({
+            ProductoId: dato.id,
+            stock: 0,
+            entradasStock: '',
+            entradasValor: '',
+            salidasStock: '',
+            salidasValor: ''
+          })
         })
+        
 
         const res = {
           success: true,
