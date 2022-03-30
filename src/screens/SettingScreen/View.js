@@ -126,9 +126,9 @@ const SettingView = ({
               <Box sx={{ marginTop: 2 }} />
               <Typography>
                 Si deseas conocer más información acerca de nuestros servicios,
-                puedes contactarnos a nuestro{' '}
+                puedes contactarnos a nuestro correo {' '}
                 <Link color="secondary" underline="always">
-                  {'correo'}
+                  {'hola@duoloon.com'}
                 </Link>{' '}
                 de atención al cliente o puedes escribirnos mediante{' '}
                 <Link
