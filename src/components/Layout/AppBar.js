@@ -61,7 +61,18 @@ export const AppBar = ({ action, saveData, allProduct }) => {
         const workbookSheets = workbook.SheetNames
         const sheet = workbookSheets[0]
         const dataExcel = utils.sheet_to_json(workbook.Sheets[sheet])
-        saveData({ data: dataExcel })
+        if (path === '/product') {
+          var value = dataExcel.length + allProduct.length
+          if (status()) {
+            saveData({ data: dataExcel })
+          } else if (value > 49) {
+            setOpen(true)
+          } else {
+            saveData({ data: dataExcel })
+          }
+        } else {
+          saveData({ data: dataExcel })
+        }
       } catch (error) {
         enqueueSnackbar('Error Insertando los datos del excel', {
           variant: 'error'
@@ -70,6 +81,15 @@ export const AppBar = ({ action, saveData, allProduct }) => {
       setExcel(null)
     }
   }, [excel])
+  const verify = () => {
+    if (status()) {
+      return false
+    } else if (allProduct.length > 49) {
+      return true
+    } else {
+      return false
+    }
+  }
   return (
     <>
       <Box
@@ -137,12 +157,7 @@ export const AppBar = ({ action, saveData, allProduct }) => {
           <>
             <Button
               sx={{ marginLeft: 'auto' }}
-              disabled={
-                (status() && path === '/product') ||
-                (path === '/product' && allProduct.length === 50)
-                  ? true
-                  : false
-              }
+              disabled={path === '/product' && verify()}
               onClick={() => {
                 setOpenExcel(true)
               }}
@@ -155,7 +170,7 @@ export const AppBar = ({ action, saveData, allProduct }) => {
               onClick={() => {
                 if (
                   (status() && path === '/product') ||
-                  (path === '/product' && allProduct.length === 50)
+                  (path === '/product' && allProduct.length > 50)
                 ) {
                   setOpen(true)
                 } else {

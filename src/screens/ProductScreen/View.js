@@ -56,7 +56,6 @@ const ProductView = ({
   const [open, setOpen] = useState(true)
   const [update, setUpdate] = useState(false)
   const [ids, setIds] = useState([])
-  console.log(allProduct)
   const handleClick = () => {
     setOpen(false)
     setPath('/product')
