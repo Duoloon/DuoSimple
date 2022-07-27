@@ -5,7 +5,8 @@ import { useLocation } from '../useLocation'
 
 export const getClients = () => {
   const { isLoading, data, error } = useQuery('/api/cliente', () =>
-    request.client.get()
+    request.client.get(),
+    { refetchInterval: 5000 }
   )
   return {
     isLoading,
@@ -26,10 +27,12 @@ export const mutateClients = () => {
           enqueueSnackbar(`Cliente ${data?.message}`, {
             variant: 'success'
           })
-          setPath('/client')
-          setTimeout(() => {
-            window.location.reload(true)
-          }, 3000)
+          if (payload?.true) {
+            setPath('/client')
+            setTimeout(() => {
+              window.location.reload(true)
+            }, 3000)
+          }
         }
       }
     }

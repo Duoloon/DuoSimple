@@ -8,9 +8,10 @@ import {
   styled,
   Modal,
   Stack,
-  Link
+  Avatar,
+  Chip
 } from '@mui/material'
-import { useLocation, useLicense } from '../../Hooks'
+import { useLocation, useLicense, useDolar } from '../../Hooks'
 import { titles, download, filedownload } from '../../variables'
 import { read, utils, writeFile } from 'xlsx'
 import { useSnackbar } from 'notistack'
@@ -32,6 +33,7 @@ const style = {
 export const AppBar = ({ action, saveData, allProduct }) => {
   const { enqueueSnackbar } = useSnackbar()
   const { path, setPath } = useLocation()
+  const { dolar } = useDolar()
   const [excel, setExcel] = useState(null)
   const [open, setOpen] = useState(false)
   const [openExcel, setOpenExcel] = useState(false)
@@ -153,7 +155,8 @@ export const AppBar = ({ action, saveData, allProduct }) => {
           </>
         ) : path === '/inventory/history/entry' ||
           path === '/inventory/history/exit' ||
-          path === '/setting' ? null : (
+          path === '/setting' ||
+          path === '/seller' || path === '/seller/history'  ? null : (
           <>
             <Button
               sx={{ marginLeft: 'auto' }}
@@ -183,6 +186,27 @@ export const AppBar = ({ action, saveData, allProduct }) => {
               <Add />
               Agregar
             </Button>
+          </>
+        )}
+        {path === '/seller' && (
+          <>
+            <Chip
+              avatar={<Avatar>H</Avatar>}
+              label={`Historial de Facturación`}
+              variant="outlined"
+              color="info"
+              onClick={() => {
+                setPath(path + '/history')
+              }}
+              sx={{ marginLeft: "auto" }}
+            />
+            <Chip
+              avatar={<Avatar>$</Avatar>}
+              label={`Tasa del Dolar $ ${dolar}`}
+              variant="filled"
+              color="info"
+              sx={{ marginLeft: 3 }}
+            />
           </>
         )}
       </Box>

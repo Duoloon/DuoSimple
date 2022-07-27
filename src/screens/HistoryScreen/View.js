@@ -12,19 +12,16 @@ import {
   Switch,
   FormControlLabel
 } from '@mui/material'
-import { AppBar, Search } from '../../components'
+import { AppBar } from '../../components'
 import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid'
-import { useLocation } from '../../Hooks'
-import CloseIcon from '@mui/icons-material/Close'
-import { Delete, Edit } from '@mui/icons-material'
+import { Delete, WhatsApp } from '@mui/icons-material'
 import Slide from '@mui/material/Slide'
-import { titles } from '../../variables'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-const HistoryView = ({ data, isLoading, path }) => {
+const HistoryView = ({ data, isLoading, path, destroy }) => {
   const columnsEntry = [
     {
       field: 'proveedor',
@@ -85,9 +82,78 @@ const HistoryView = ({ data, isLoading, path }) => {
     { field: 'nota', headerName: 'Notas', width: 150 },
     { field: 'date', headerName: 'Fecha', width: 150 }
   ]
+  const columnsSale = [
+    { field: 'ClienteId', headerName: 'Cliente ID', width: 150 },
+    {
+      field: 'productos',
+      headerName: 'Productos',
+      width: 150,
+      valueGetter: ({ row }) => row.Productos.map(item => item.nombre)
+    },
+    {
+      field: 'cantidad',
+      headerName: 'Cantidad',
+      type: 'number',
+      width: 150,
+      valueGetter: ({ row }) =>
+        row.Productos.map(item => item.Ventas_Producto.cantidad)
+    },
+    { field: 'metodo_de_pago', headerName: 'Metodo de Pago', width: 150 },
+    {
+      field: 'iva',
+      headerName: 'IVA',
+      type: 'number',
+      width: 150,
+      valueGetter: ({ row }) => `$ ${row.iva}`
+    },
+    {
+      field: 'sub_total',
+      headerName: 'Sub-Total',
+      width: 150,
+      valueGetter: ({ row }) => `$ ${row.sub_total}`
+    },
+    {
+      field: 'total',
+      headerName: 'Total',
+      width: 150,
+      valueGetter: ({ row }) => `$ ${row.total}`
+    },
+    { field: 'descuento', headerName: 'Descuento', width: 150 },
+    { field: 'createdAt', headerName: 'Fecha', width: 150 },
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      cellClassName: 'actions',
+      getActions: ({ id }) => {
+        return [
+          <GridActionsCellItem
+            icon={<WhatsApp color="success" />}
+            label="Edit"
+            onClick={() => console.log(id)}
+            color="inherit"
+          />,
+          <GridActionsCellItem
+            icon={<Delete color="error" />}
+            label="Delete"
+            onClick={() => {
+              destroy(id)
+            }}
+            color="inherit"
+          />
+        ]
+      }
+    }
+  ]
+  const screen = {
+    '/inventory/history/entry': columnsEntry,
+    '/inventory/history/exit': columnsExit,
+    '/seller/history': columnsSale
+  }
   const datos = {
     rows: data,
-    columns: path === '/inventory/history/entry' ? columnsEntry : columnsExit
+    columns: screen[path]
   }
   return (
     <Box
@@ -100,7 +166,7 @@ const HistoryView = ({ data, isLoading, path }) => {
       }}
     >
       <AppBar />
-      <Box sx={{ height: '700px', width: '100%', padding: 3 }}>
+      <Box sx={{ height: '88%', width: '100%', padding: 3 }}>
         <DataGrid
           {...datos}
           loading={isLoading}

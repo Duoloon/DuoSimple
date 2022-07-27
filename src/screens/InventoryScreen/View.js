@@ -211,7 +211,7 @@ const InventoryView = ({
       }}
     >
       <AppBar />
-      <Box sx={{ height: '700px', width: '100%', padding: 3 }}>
+      <Box sx={{ height: '88%', width: '100%', padding: 3 }}>
         <DataGrid
           {...datos}
           loading={isLoading}
@@ -299,7 +299,7 @@ const InventoryView = ({
                 <Box sx={{ marginTop: 2 }} />
 
                 <Stack direction="row" sx={{ height: '300px' }} spacing={2}>
-                  <ResizableBox width={600} height={300} style={{}}>
+                  <ResizableBox width={600} height={250}>
                     <Chart
                       options={{
                         data: graficasStock,
@@ -308,7 +308,7 @@ const InventoryView = ({
                       }}
                     />
                   </ResizableBox>
-                  <ResizableBox width={600} height={300} style={{}}>
+                  <ResizableBox width={600} height={250}>
                     <Chart
                       options={{
                         data: graficasValor,

@@ -11,10 +11,12 @@
     dbinit().then(console.log("db iniciada"));
    
     const clienteRouter = require('./routes/cliente');
+    const ventaRouter = require('./routes/venta');
     const proveedorRouter = require('./routes/proveedor');
     const productoRouter = require('./routes/producto');
     const comboRouter = require('./routes/combo');
     const comboproductosRouter = require('./routes/relaciones/combo_producto');
+    const ventaproductosRouter = require('./routes/relaciones/venta_producto');
     const entradaRouter = require('./routes/entrada');
     const salidaRouter = require('./routes/salida');
     const inventarioRouter = require('./routes/inventario');
@@ -55,6 +57,7 @@
 
     //app.use('/', routes);
     app.use('/api/cliente', clienteRouter);
+    app.use('/api/venta', ventaRouter);
     app.use('/api/proveedor', proveedorRouter);
     app.use('/api/producto', productoRouter);
     app.use('/api/combo', comboRouter);
@@ -63,6 +66,7 @@
     app.use('/api/salidas', salidaRouter);
     app.use('/api/inventario', inventarioRouter);
     app.use('/api/licencia', licenciaRouter);
+    app.use('/api/ventaproductos', ventaproductosRouter);
     app.use('/api/db', dbRouter);
     app.use('/', function(req, res){
         res.json('Inventario')

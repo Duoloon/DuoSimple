@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getLicense, mutateLicense, useLicense } from '../../Hooks'
+import { getLicense, mutateLicense, useLicense, useDolar } from '../../Hooks'
 import { useSnackbar } from 'notistack'
 
 const data = {
@@ -10,6 +10,7 @@ export const Actions = () => {
   const [values, setValues] = useState(data)
   const { data: allLicencia, isLoading: getLoading, message } = getLicense()
   const { license, setLicense } = useLicense()
+  const { dolar, setDolar } = useDolar()
   const { mutate, isLoading: Loading, error } = mutateLicense()
 
   useEffect(() => {
@@ -43,6 +44,8 @@ export const Actions = () => {
     isLoading: getLoading || Loading,
     // error,
     handleChange,
-    saveData
+    saveData,
+    dolar,
+    setDolar
   }
 }

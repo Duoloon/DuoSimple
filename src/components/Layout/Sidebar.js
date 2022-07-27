@@ -16,7 +16,8 @@ import {
   SettingsOutlined,
   LocalShippingOutlined,
   Inventory2Outlined,
-  InventoryOutlined
+  InventoryOutlined,
+  StoreOutlined
 } from '@mui/icons-material'
 import { useLocation } from '../../Hooks'
 
@@ -74,6 +75,11 @@ const Drawer = styled(MuiDrawer, {
 }))
 
 const items = [
+  {
+    title: 'Ventas',
+    icon: <StoreOutlined />,
+    link: '/seller'
+  },
   {
     title: 'Inventario',
     icon: <InventoryOutlined />,
@@ -198,7 +204,7 @@ export const Sidebar = ({ children }) => {
       </Drawer>
       <Box
         component="main"
-        sx={{ p: 3, width: '100%', height: path === '/setting' ? '100vh' : "100%", backgroundColor: '#EDEFF3' }}
+        sx={{ p: 3, width: '100%', height: path === '/setting' ? '100vh' : "100vh", backgroundColor: '#EDEFF3' }}
       >
         {children}
       </Box>

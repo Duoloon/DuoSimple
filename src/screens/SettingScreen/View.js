@@ -20,7 +20,9 @@ const SettingView = ({
   isLicense,
   isLoading,
   handleChange,
-  saveData
+  saveData,
+  dolar,
+  setDolar
 }) => {
   return (
     <Box
@@ -126,7 +128,7 @@ const SettingView = ({
               <Box sx={{ marginTop: 2 }} />
               <Typography>
                 Si deseas conocer más información acerca de nuestros servicios,
-                puedes contactarnos a nuestro correo {' '}
+                puedes contactarnos a nuestro correo{' '}
                 <Link color="secondary" underline="always">
                   {'hola@duoloon.com'}
                 </Link>{' '}
@@ -143,6 +145,33 @@ const SettingView = ({
                   {'whatsapp.'}
                 </Link>
               </Typography>
+            </Box>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="panel3a-content"
+            id="panel3a-header"
+          >
+            <Typography sx={{ width: '20%', flexShrink: 0 }}>
+              Tasa del dolar diario
+            </Typography>
+             <Typography sx={{ color: 'text.secondary' }}>
+              Configura la tasa manualmente
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Box sx={{ width: '100%', padding: 3 }}>
+              <TextField
+                id="outlined-Tasa"
+                label="Tasa del dolar"
+                size="small"
+                value={dolar}
+                onChange={e => setDolar(e.target.value)}
+                fullWidth
+                variant="outlined"
+              />
             </Box>
           </AccordionDetails>
         </Accordion>

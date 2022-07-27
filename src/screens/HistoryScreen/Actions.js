@@ -1,13 +1,21 @@
-import { getEntry, getExit } from '../../Hooks'
+import { getEntry, getExit, getSale, destroySale } from '../../Hooks'
 import { useLocation } from '../../Hooks'
 export const Actions = () => {
   const { data: allEntry, isLoading: getLoading } = getEntry()
   const { data: allExit, isLoading: Loading } = getExit()
-  const {path} = useLocation()
-
+  const { data: allSale, isLoading: LoadingSale } = getSale()
+  const { destroy, isLoading: destroyIsLoading } = destroySale()
+  const { path } = useLocation()
+  const screen = {
+    '/inventory/history/entry': allEntry,
+    '/inventory/history/exit': allExit,
+    '/seller/history': allSale
+  }
+  console.log(allSale)
   return {
-    data: path === "/inventory/history/entry" ? allEntry : allExit,
-    isLoading: getLoading || Loading,
-    path
+    data: screen[path],
+    isLoading: getLoading || Loading || LoadingSale || destroyIsLoading,
+    path,
+    destroy
   }
 }

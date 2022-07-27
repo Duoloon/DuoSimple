@@ -5,3 +5,5 @@ export * from "./useProduct";
 export * from "./useCombo";
 export * from "./useInventory";
 export * from "./useLicense";
+export * from "./useDolar";
+export * from "./useSale";

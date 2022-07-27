@@ -9,11 +9,13 @@ export const PERSISTOR_KEYS = {
 
 export const titles = {
   '/': 'Inventario',
+  '/seller': 'Ventas',
   '/client': 'Clientes',
   '/product': 'Productos',
   '/supplier': 'Proveedor',
   '/inventory/history/entry': 'Historial de Entrada',
   '/inventory/history/exit': 'Historial de salida',
+  '/seller/history': 'Historial de Facturas',
   '/setting': 'Ajustes'
 }
 export const download = {
@@ -22,26 +24,32 @@ export const download = {
   '/supplier': 'importar_proveedor.xlsx'
 }
 
+export const paymentMethods = [
+  'Binance',
+  'Efectivo $',
+  'Efectivo Bs',
+  'Pago Movil',
+  'Punto de venta'
+]
 
 export const dataexcelProducto = [
   {
     codebar: '123515',
-    sku : '0001',
+    sku: '0001',
     nombre: 'pan',
-    descripcion: "Bimbo",
+    descripcion: 'Bimbo',
     unidades: 1000,
     precio: 2000
   },
   {
     codebar: '1235545',
-    sku : '0002',
+    sku: '0002',
     nombre: 'arroz',
-    descripcion: "el gran marquez",
+    descripcion: 'el gran marquez',
     unidades: 1000,
     precio: 2500
   }
 ]
-
 
 export const dataexcelCliente = [
   {
@@ -49,16 +57,16 @@ export const dataexcelCliente = [
     direccion: 'pora ahi',
     correo: 'datos',
     telefono: 4140512,
-    rut: 2776510, 
-    notas: "notas"
+    rut: 2776510,
+    notas: 'notas'
   },
   {
     nombre: 'Cesar',
     direccion: 'pora ahi',
     correo: 'datos',
     telefono: 4140512,
-    rut: 2776510, 
-    notas: "notas"
+    rut: 2776510,
+    notas: 'notas'
   }
 ]
 
@@ -68,18 +76,18 @@ export const dataexcelProveedor = [
     direccion: 'pora ahi',
     correo: 'datos',
     telefono: 4140512,
-    rut: 2776510, 
-    bank: "Banco", 
-    notas: "notas"
+    rut: 2776510,
+    bank: 'Banco',
+    notas: 'notas'
   },
   {
     nombre: 'Cesar',
     direccion: 'pora ahi',
     correo: 'datos',
     telefono: 4140512,
-    rut: 2776510, 
-    bank: "Banco", 
-    notas: "notas"
+    rut: 2776510,
+    bank: 'Banco',
+    notas: 'notas'
   }
 ]
 

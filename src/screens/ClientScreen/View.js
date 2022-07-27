@@ -115,7 +115,7 @@ const ClientView = ({
       {path === '/client' ? (
         <>
           <AppBar action={setOpen} saveData={importExcel} />
-          <Box sx={{ height: '700px', width: '100%', padding: 3 }}>
+          <Box sx={{ height: '88%', width: '100%', padding: 3 }}>
             <DataGrid
               {...datos}
               loading={isLoading}

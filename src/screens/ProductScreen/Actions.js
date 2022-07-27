@@ -15,7 +15,7 @@ const data = {
   sku: '',
   codebar: '',
   descripcion: '',
-  unidad: 0,
+  unidad: "",
   precio: 0
 }
 export const Actions = () => {

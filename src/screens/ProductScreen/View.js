@@ -163,7 +163,7 @@ const ProductView = ({
               </Button>
             </ButtonGroup>
           </Box> */}
-          <Box sx={{ height: '700px', width: '100%', padding: 3 }}>
+          <Box sx={{ height: '88%', width: '100%', padding: 3 }}>
             <DataGrid
               rows={tab ? allProduct : allCombo}
               columns={columns}
@@ -236,28 +236,27 @@ const ProductView = ({
                     size="small"
                     placeholder={codebar}
                     variant="outlined"
-                    onKeyDown={e => {
+                    onKeyDown={async e => {
                       if (e.keyCode === 13) {
                         var code = e.target.value
-                        setValues({
-                          ...values,
-                          codebar: code
-                        })
+                        audio.currentTime = 0
+                        await audio
+                          .play()
+                          .then(() => {
+                            console.log('audio played auto')
+                            setValues({
+                              ...values,
+                              codebar: code
+                            })
+                          })
+                          .catch(error => {
+                            console.log(error)
+                          })
                         document.getElementById('sku').focus()
                       }
                     }}
                     autoFocus
-                    onChange={async () => {
-                      audio.currentTime = 0
-                      await audio
-                        .play()
-                        .then(() => {
-                          console.log('audio played auto')
-                        })
-                        .catch(error => {
-                          console.log(error)
-                        })
-                    }}
+                    onChange={handleChange('codebar')}
                     fullWidth
                   />
                   <TextField
@@ -318,7 +317,6 @@ const ProductView = ({
                       }
                     }}
                     value={unidad}
-                    type="number"
                     onChange={handleChange('unidad')}
                     variant="outlined"
                     fullWidth

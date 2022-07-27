@@ -9,6 +9,7 @@ const ExitScreen = lazy(() => import('../screens/InventoryScreen/Exit'))
 const ProductScreen = lazy(() => import('../screens/ProductScreen'))
 const SupplierScreen = lazy(() => import('../screens/SupplierScreen'))
 const SettingScreen = lazy(() => import('../screens/SettingScreen'))
+const SellerScreen = lazy(() => import('../screens/SellerScreen'))
 
 export const AppRouter = () => {
   const { path } = useLocation()
@@ -27,6 +28,8 @@ export const AppRouter = () => {
         <Route path="/supplier" element={<SupplierScreen />} />
         <Route path="/supplier/create" element={<SupplierScreen />} />
         <Route path="/setting" element={<SettingScreen />} />
+        <Route path="/seller" element={<SellerScreen />} />
+        <Route path="/seller/history" element={<HistoryScreen />} />
       </Routes>
     </Router>
   )
