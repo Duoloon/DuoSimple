@@ -503,6 +503,7 @@ const View = ({
                 total: total().toFixed(2),
                 tasa: dolar
               })
+              handleClose()
             }}
             // disabled={isLoading}
             sx={{ marginTop: 1, width: '100%' }}
