@@ -1,7 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import request from '../../api'
 import { useSnackbar } from 'notistack'
 import { useLocation } from '../useLocation'
+import { useCart } from '../useCart'
 
 export const getSale = () => {
   const { isLoading, data, error } = useQuery('/api/venta', () =>
@@ -16,19 +17,30 @@ export const getSale = () => {
 
 export const mutateSale = () => {
   const { enqueueSnackbar } = useSnackbar()
-  const { setPath } = useLocation()
+  // const { setPath } = useLocation()
+  const { setProduct } = useCart()
   const { mutate, isLoading, error } = useMutation(
     payload => request.sale.post(payload),
     {
       onSuccess: data => {
+        console.log(data)
         if (data?.data) {
           enqueueSnackbar(`Factura Creada con exito`, {
             variant: 'success'
           })
-          setPath('/seller')
-          setTimeout(() => {
-            window.location.reload(true)
-          }, 3000)
+          setProduct([])
+          //   setPath('/seller')
+          //   setTimeout(() => {
+          //     window.location.reload(true)
+          //   }, 3000)
+        }
+        if (data?.error) {
+          enqueueSnackbar(
+            `Error Creando la factura por favor Ingrese un cliente`,
+            {
+              variant: 'error'
+            }
+          )
         }
       }
     }

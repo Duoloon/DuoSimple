@@ -10,9 +10,14 @@ const test = async (req, res) => {
 
 const list = async (req, res) => {
   const response = await Ventas.findAll({
-    include: {
-     model: Producto
-   }
+    include: [
+      {
+        model: Producto
+      },
+      {
+        model: Cliente
+      }
+    ]
    })
     .then(function (data) {
       const res = { success: true, data: data }

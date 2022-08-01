@@ -83,7 +83,12 @@ const HistoryView = ({ data, isLoading, path, destroy }) => {
     { field: 'date', headerName: 'Fecha', width: 150 }
   ]
   const columnsSale = [
-    { field: 'ClienteId', headerName: 'Cliente ID', width: 150 },
+    {
+      field: 'ClienteId',
+      headerName: 'Cliente',
+      width: 150,
+      valueGetter: ({ row }) => row.Cliente.nombre
+    },
     {
       field: 'productos',
       headerName: 'Productos',

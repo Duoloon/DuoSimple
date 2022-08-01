@@ -12,7 +12,13 @@ import {
   Switch
 } from '@mui/material'
 import { AppBar } from '../../components'
-import { getClients, getProducts, useDolar, mutateSale } from '../../Hooks'
+import {
+  getClients,
+  getProducts,
+  useDolar,
+  mutateSale,
+  useCart
+} from '../../Hooks'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { ListCard, CardProduct, Search } from '../../components'
 import { useSnackbar } from 'notistack'
@@ -38,9 +44,10 @@ const View = ({
   const [open, setOpen] = useState(false)
   const [open1, setOpen1] = useState(false)
   const scannerRef = useRef()
-  const [product, setProduct] = useState([])
+  const { product, setProduct } = useCart()
   const [method, setMethod] = useState('Punto de venta')
-  const [client, setClient] = useState('')
+  const [client, setClient] = useState('Negocio')
+  const [dolares, setDolares] = useState(0)
   const [discount, setDiscount] = useState(0)
   const [switchs, setSwitch] = useState(true)
   const { data: allClients } = getClients()
@@ -419,6 +426,38 @@ const View = ({
               </Box>
             ))}
           </Box>
+          {method === 'BS / Dolares' && (
+            <Box>
+              <Box sx={{ marginTop: 1 }} />
+              <Typography sx={{ color: 'text.secondary' }}>
+                BS y dolares:
+              </Typography>
+
+              <Box sx={{ marginTop: 1 }} />
+
+              <TextField
+                id="dolars"
+                label="Ingrese Dolares"
+                size="small"
+                value={dolares}
+                onChange={e => setDolares(e.target.value)}
+                fullWidth
+                variant="outlined"
+              />
+              <Box sx={{ marginTop: 1 }} />
+
+              <Box sx={{ display: 'flex' }}>
+                <Typography sx={{ color: 'text.secondary' }}>
+                  Total a pagar en Bs
+                </Typography>
+                <Typography
+                  sx={{ color: 'text.secondary', marginLeft: 'auto' }}
+                >
+                  {'Bs ' + ((total() - dolares) * dolar).toFixed(2)}
+                </Typography>
+              </Box>
+            </Box>
+          )}
 
           <Box sx={{ marginTop: 1 }} />
           <Typography sx={{ color: 'text.secondary' }}>
@@ -453,7 +492,7 @@ const View = ({
           </Box>
           <Button
             variant="contained"
-            onClick={() =>
+            onClick={() => {
               mutate({
                 productos: product,
                 metodo_de_pago: method,
@@ -464,7 +503,7 @@ const View = ({
                 total: total().toFixed(2),
                 tasa: dolar
               })
-            }
+            }}
             // disabled={isLoading}
             sx={{ marginTop: 1, width: '100%' }}
           >

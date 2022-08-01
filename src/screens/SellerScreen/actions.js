@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { mutateClients } from '../../Hooks'
+import { mutateClientsSeller } from '../../Hooks'
 
 const data = {
   nombre: '',
@@ -11,7 +11,7 @@ const data = {
   path: true
 }
 const Action = () => {
-  const { mutate, error } = mutateClients()
+  const { mutate, error } = mutateClientsSeller()
   const [values, setValues] = useState(data)
 
   useEffect(() => {

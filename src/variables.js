@@ -29,7 +29,8 @@ export const paymentMethods = [
   'Efectivo $',
   'Efectivo Bs',
   'Pago Movil',
-  'Punto de venta'
+  'Punto de venta',
+  "BS / Dolares"
 ]
 
 export const dataexcelProducto = [
