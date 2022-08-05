@@ -18,6 +18,6 @@ Venta.init(
     modelName: 'Ventas'
   }
 )
-Venta.belongsTo(Cliente)
+Venta.belongsTo(Cliente, { foreignKey: { allowNull: true } })
 
 module.exports = Venta
